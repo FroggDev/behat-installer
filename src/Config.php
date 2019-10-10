@@ -8,8 +8,8 @@ class Config
      * Screenshot internal config
      */
 
-    /** @var string default screenshot main path */
-    const SCREENSHOT_MAIN_DIR_DEFAULT = 'public/output/behat';
+    /** @var string default report main path */
+    const REPORT_DIR = 'public/output/behat';
 
     /** @var string default screenshot ok path in screenshot main path */
     const SCREENSHOT_DIR_OK = 'screenshotsOk';
@@ -19,4 +19,6 @@ class Config
 
     /** @var string default screenshot custom path in screenshot main path */
     const SCREENSHOT_DIR_CUSTOM = 'screenshotsCustom';
+
+
 }

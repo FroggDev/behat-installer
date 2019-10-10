@@ -5,10 +5,10 @@ use Exception;
 use Behat\Mink\Session;
 
 /**
- * Trait NavigationUtilTrait
+ * Trait DialogBoxTrait
  * @package froggdev\BehatContexts\Util
  */
-trait NavigationUtilTrait
+trait DialogBoxTrait
 {
     /**
      * Check if a pup up is opened
