@@ -1,0 +1,11 @@
+default:
+  suites:
+    default:
+      paths: [ '%paths.base%/tests/features' ]
+      contexts:
+          - froggdev\BehatContexts\Context\ScreenshotContext:
+						screenshotPath: public/output/behat
+						disableScreenshot: false
+
+  extensions:
+    behatcontexts\Extension: ~
