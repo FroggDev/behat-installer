@@ -6,7 +6,7 @@ use Behat\Behat\Hook\Scope\AfterStepScope;
 use Behat\Behat\Hook\Scope\BeforeScenarioScope;
 use Behat\Behat\Context\Context;
 use Behat\Gherkin\Node\ScenarioInterface as Scenario;
-use Behat\MinkExtension\Context\MinkContext;
+use Behat\MinkExtension\Context\RawMinkContext;
 use froggdev\BehatContexts\Config;
 use froggdev\BehatContexts\Util\FileUtilTrait;
 use froggdev\BehatContexts\Util\NavigationUtilTrait;
@@ -15,7 +15,7 @@ use froggdev\BehatContexts\Util\NavigationUtilTrait;
  * Class ScreenshotContext
  * @package froggdev\BehatContexts\Context
  */
-class ScreenshotContext extends MinkContext implements Context
+class ScreenshotContext extends RawMinkContext implements Context
 {
 
     ##########
@@ -55,9 +55,7 @@ class ScreenshotContext extends MinkContext implements Context
      */
     public function __construct(string $screenshotDir=Config::SCREENSHOT_MAIN_DIR_DEFAULT, bool $doScreenshot=true)
     {
-        $this->screenshotPath = $this->setTrailingSlash(getcwd()) .'../'. $this->setTrailingSlash($screenshotDir);
-
-        echo 'saving screenshots to [' . $this->screenshotPath .']<br>\n';
+        $this->screenshotPath = $this->setTrailingSlash(getcwd()) . $this->setTrailingSlash($screenshotDir);
 
 		$this->doScreenshot = $doScreenshot;
     }
@@ -94,8 +92,8 @@ class ScreenshotContext extends MinkContext implements Context
 
         //@ TODO LANG
         // Test if names are defined to continue
-        if(!$screenshotsFeature) exit('Impossible de faire des screenshots ! Veuillez définir un nom à votre Feature pour pouvoir prendre des screenshots');
-        if(!$screenshotsTitle) exit('Impossible de faire des screenshots ! Veuillez définir un nom à votre Scenario pour pouvoir prendre des screenshots');
+        if(!$screenshotsFeature) exit('\n\nErreur : Impossible de faire des screenshots ! Veuillez définir un nom à votre Feature pour pouvoir prendre des screenshots\n\n');
+        if(!$screenshotsTitle) exit('\n\nErreur : Impossible de faire des screenshots ! Veuillez définir un nom à votre Scenario pour pouvoir prendre des screenshots\n\n');
 
         // Set screenshot ko path
         $screenshotsPath    = Config::SCREENSHOT_DIR_KO;
