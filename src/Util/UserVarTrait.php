@@ -7,8 +7,6 @@ namespace froggdev\BehatContexts\Util;
  */
 trait UserVarTrait
 {
-    use FileTrait;
-
     /** @var string TMPFILE use to store var between each scenario to send to another one */
     private $tmpFile = './test.tmp';
 

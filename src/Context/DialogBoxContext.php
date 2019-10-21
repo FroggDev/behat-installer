@@ -10,12 +10,6 @@ use froggdev\BehatContexts\Util\DialogBoxTrait;
 trait DialogBoxContext
 {
 
-    ##########
-    # TRAITS #
-    ##########
-
-    use DialogBoxTrait;
-
     ###########
     # CONTEXT #
     ###########

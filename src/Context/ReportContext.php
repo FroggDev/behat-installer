@@ -6,7 +6,7 @@ use froggdev\BehatContexts\Util\FileTrait;
 
 Trait ReportContext
 {
-    use FileTrait;
+
 
     /**
      * @Given J'efface les anciens rapports behat

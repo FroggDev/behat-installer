@@ -11,7 +11,7 @@ use froggdev\BehatContexts\Util\ScreenshotTrait;
  */
 trait ScreenshotContext
 {
-    use ScreenshotTrait;
+
 
     /**
      * @Then Je désactive les captures d'écran automatiques

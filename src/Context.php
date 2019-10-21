@@ -1,5 +1,5 @@
 <?php
-namespace froggdev\BehatContexts\Context;
+namespace froggdev\BehatContexts;
 
 use Behat\Behat\Hook\Scope\AfterStepScope;
 use Behat\Behat\Hook\Scope\BeforeScenarioScope;
@@ -8,17 +8,42 @@ use froggdev\BehatContexts\Config;
 use froggdev\BehatContexts\Context\Mailbox\MailinatorContext;
 use froggdev\BehatContexts\Context\Mailbox\TemprContext;
 use froggdev\BehatContexts\Context\Mailbox\YopmailContext;
-
+use froggdev\BehatContexts\Util\DialogBoxTrait;
+use froggdev\BehatContexts\Util\ErrorTrait;
+use froggdev\BehatContexts\Util\FileTrait;
+use froggdev\BehatContexts\Util\ScreenshotTrait;
+use froggdev\BehatContexts\Context\AbstractUserVarContext;
+use froggdev\BehatContexts\Context\DialogBoxContext;
+use froggdev\BehatContexts\Context\WindowsContext;
+use froggdev\BehatContexts\Context\SessionContext;
+use froggdev\BehatContexts\Context\NavigationContext;
+use froggdev\BehatContexts\Context\FormContext;
+use froggdev\BehatContexts\Context\DisplayContext;
+use froggdev\BehatContexts\Context\ReportContext;
+use froggdev\BehatContexts\Context\ErrorContext;
+use froggdev\BehatContexts\Context\ScreenshotContext;
+		
 /**
  * Class Context
  * @package froggdev\BehatContexts\Context
  */
 class Context extends AbstractUserVarContext
 {
-
     ##########
     # TRAITS #
     ##########
+
+    use DialogBoxTrait;
+
+    use ErrorTrait;
+
+    use FileTrait;
+
+    use ScreenshotTrait;
+
+    ###########
+    # CONTEXT #
+    ###########
 
     // BROWSER
 
@@ -66,9 +91,6 @@ class Context extends AbstractUserVarContext
     /** @var Scenario */
     private $currentScenario;
 
-
-
-
     ###############
     # CONSTRUCTOR #
     ###############
@@ -76,24 +98,22 @@ class Context extends AbstractUserVarContext
     /**
      * Context constructor
      * init this screenshotPath & doScreenshot
-     *
-     * @param string $screenshotDir
-     * @param bool $doScreenshot
      */
-    public function __construct($test)
+    public function __construct(?string $params=null)
     {
-        var_dump($test);
+
+				var_dump("PRAMS = " . $params);
 
         $currentPath = $this->setTrailingSlash(getcwd());
 
         $this->reportPath= $currentPath .$this->setTrailingSlash(Config::REPORT_DIR);
         $this->doScreenshot = true;
 
-        /*
-        $this->screenshotPath = $this->setTrailingSlash(getcwd()) . $this->setTrailingSlash($screenshotDir);
+        
+        $this->screenshotPath = "d:\\";//$this->setTrailingSlash(getcwd()) . $this->setTrailingSlash($screenshotDir);
 
-		$this->doScreenshot = $doScreenshot;
-		*/
+				//$this->doScreenshot = $doScreenshot;
+
     }
 
     #########

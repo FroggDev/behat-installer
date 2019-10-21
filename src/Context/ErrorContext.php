@@ -10,7 +10,6 @@ use froggdev\BehatContexts\Util\ErrorTrait;
  */
 trait ErrorContext
 {
-    use ErrorTrait;
 
     /**
      * @When Je verifie si des erreurs non bloquantes sont survenues

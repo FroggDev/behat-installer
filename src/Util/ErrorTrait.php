@@ -5,8 +5,6 @@ use froggdev\BehatContexts\Config;
 
 trait ErrorTrait
 {
-    use ScreenshotTrait;
-
     /** @var string error array separator */
     private $errSeparator = '_@_';
 

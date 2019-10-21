@@ -9,10 +9,6 @@ use Exception;
  */
 trait ScreenshotTrait
 {
-    use FileTrait;
-
-    use DialogBoxTrait;
-
     /**
      * @param string $path
      * @param string $fileName
