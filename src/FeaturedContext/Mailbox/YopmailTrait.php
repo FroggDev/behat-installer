@@ -1,11 +1,11 @@
 <?php
-namespace froggdev\BehatContexts\Context\Mailbox;
+namespace froggdev\BehatContexts\FeaturedContext\Mailbox;
 
 /**
- * Trait YopmailContext
- * @package froggdev\BehatContexts\Context\Mailbox
+ * Trait YopmailTrait
+ * @package froggdev\BehatContexts\FeaturedContext\Mailbox
  */
-trait YopmailContext
+trait YopmailTrait
 {
     /**
      * @Given Je me connecte sur Yopmail avec le compte ":email"

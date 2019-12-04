@@ -1,12 +1,13 @@
 <?php
-namespace froggdev\BehatContexts\Context;
+namespace froggdev\BehatContexts\FeaturedContext;
 
-/**
- * Trait WindowsContext
- * @package froggdev\BehatContexts\Context
- */
-trait WindowsContext
+trait WindowTrait
 {
+
+    #########################
+    # ACTION FRAME & WINDOW #
+    #########################
+
     /**
      * @Given Je redimensionne l'écran en ":largeur" x ":hauteur"
      *
@@ -57,8 +58,6 @@ trait WindowsContext
     {
         // back to main frame
         $this->switchMainFrame();
-
-        // TODO CENTRALFRAME OUTSIDE
 
         // then go to central frame
         $this->getSession()->switchToIframe($this->userVars['CENTRALFRAME']);

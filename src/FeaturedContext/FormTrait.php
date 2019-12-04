@@ -1,15 +1,16 @@
 <?php
-namespace froggdev\BehatContexts\Context;
-
+namespace froggdev\BehatContexts\FeaturedContext;
 
 use Behat\Gherkin\Node\TableNode;
+use Behat\Mink\Element\NodeElement;
+use WebDriver\Key;
 
-/**
- * Trait FormContext
- * @package froggdev\BehatContexts\Context
- */
-trait FormContext
+trait FormTrait
 {
+    ###############
+    # ACTION FORM #
+    ###############
+
     /**
      * @Given Je rempli le champ ":selecteur_css" avec la valeur ":valeur"
      *
@@ -22,30 +23,32 @@ trait FormContext
         // replace uservar in param
         $value = $this->replaceUserVar($value);
 
-        // fill the input
-        $this->getSession()
+				$input =  $this->getSession()
             ->getPage()
-            ->find('css', $css)
-            ->setValue($value);
+            ->find('css', $css);
+					
+				// Force to clean the old value
+				$input ->setValue(Key::DELETE . Key::BACKSPACE . Key::BACKSPACE . Key::BACKSPACE . Key::BACKSPACE . Key::BACKSPACE . Key::BACKSPACE . Key::BACKSPACE . Key::BACKSPACE . Key::BACKSPACE . Key::BACKSPACE);
+
+        // fill the input
+        $input->setValue($value);
     }
 
     /**
-     * @Given Je rempli le champ ":selecteur_css" avec la valeur ":valeur" en javascript
+     * @Then Je rempli le formulaire avec les valeurs:
      *
-     * @param string $css
-     * @param string $value
+     * @param TableNode $tableNode
      * @throws \Exception
      */
-    public function fillImputWithJS(string $css, string $value): void
+    public function setInputsValues(TableNode $tableNode): void
     {
-        // replace uservar in param
-        $expectedValue = $this->replaceUserVar($value);
+        // format table node value and replace vars
+        $formatedVars = $this->replaceAllUserVar($tableNode->getTable());
 
-        // set input value
-        $this
-            ->getSession()
-            ->getDriver()
-            ->evaluateScript("function(){ document.querySelector('" . $css . "').value='".$expectedValue."'; }()");
+        // fill each fields
+        foreach ($formatedVars as $value){
+            $this->iFillWith($value[0],$value[1]);
+        }
     }
 
     /**
@@ -74,6 +77,48 @@ trait FormContext
     }
 
     /**
+     * @Given Le champ nommé ":name" devrait être rempli avec la valeur ":valeur"
+     *
+     * @param string $css
+     * @param string $value
+     * @throws \Exception
+     */
+    public function inputNameShouldBeFillWith(string $name, string $value): void
+    {
+        // replace uservar in param
+        $expectedValue = $this->replaceUserVar($value);
+
+        // get input value
+        $inputValue = $this
+            ->getElementByName($name)
+            ->getAttribute('value');
+
+        // check if values match
+        if (strtolower($inputValue) !== strtolower($expectedValue)) {
+            $this->setNotBlockingErrorOccured("input $name value should be $expectedValue instead of $inputValue" );
+         }
+    }
+
+    /**
+     * @Given Je rempli le champ ":selecteur_css" avec la valeur ":valeur" en javascript
+     *
+     * @param string $css
+     * @param string $value
+     * @throws \Exception
+     */
+    public function fillImputWithJS(string $css, string $value): void
+    {
+        // replace uservar in param
+        $expectedValue = $this->replaceUserVar($value);
+
+        // set input value
+         $this
+            ->getSession()
+            ->getDriver()
+            ->evaluateScript("function(){ document.querySelector('" . $css . "').value='".$expectedValue."'; }()");
+    }
+
+    /**
      * @Given Le champ ":selecteur_css" devrait être rempli avec la valeur ":valeur" en javascript
      *
      * @param string $css
@@ -94,29 +139,6 @@ trait FormContext
         // check if values match
         if ($inputValue !== $expectedValue) {
             throw new \Exception("input $css value should be $expectedValue instead of $inputValue");
-        }
-    }
-
-    /**
-     * @Given Le champ nommé ":name" devrait être rempli avec la valeur ":valeur"
-     *
-     * @param string $css
-     * @param string $value
-     * @throws \Exception
-     */
-    public function inputNameShouldBeFillWith(string $name, string $value): void
-    {
-        // replace uservar in param
-        $expectedValue = $this->replaceUserVar($value);
-
-        // get input value
-        $inputValue = $this
-            ->getElementByName($name)
-            ->getAttribute('value');
-
-        // check if values match
-        if (strtolower($inputValue) !== strtolower($expectedValue)) {
-            $this->setNotBlockingErrorOccured("input $name value should be $expectedValue instead of $inputValue" );
         }
     }
 
@@ -156,22 +178,6 @@ JS;
         }
     }
 
-    /**
-     * @Then Je rempli le formulaire avec les valeurs:
-     *
-     * @param TableNode $tableNode
-     * @throws \Exception
-     */
-    public function setInputsValues(TableNode $tableNode): void
-    {
-        // format table node value and replace vars
-        $formatedVars = $this->replaceAllUserVar($tableNode->getTable());
-
-        // fill each fields
-        foreach ($formatedVars as $value){
-            $this->iFillWith($value[0],$value[1]);
-        }
-    }
 
     /**
      * @Then Je vérifie le formulaire avec les valeurs:
@@ -218,19 +224,6 @@ JS;
     }
 
     /**
-     * @Given Je selectionne l'élément ":num" option du champ ":css"
-     *
-     * @param string $css
-     */
-    public function iSetFirstOption(string $num, string $css): void
-    {
-        $this
-            ->getSession()
-            ->getDriver()
-            ->evaluateScript("function(){ document.querySelector('$css').selectedIndex=$num; }()");
-    }
-
-    /**
      * @Given J'upload le fichier ":fichier" dans le champ ":champ"
      *
      * @param string $file
@@ -247,5 +240,19 @@ JS;
         // basic method, not working in this case ...
         //$this->attachFileToField($field,$file);
     }
+
+    /**
+     * @Given Je selectionne l'élément ":num" option du champ ":css"
+     *
+     * @param string $css
+     */
+    public function iSetFirstOption(string $num, string $css): void
+    {
+         $this
+            ->getSession()
+            ->getDriver()
+            ->evaluateScript("function(){ document.querySelector('$css').selectedIndex=$num; }()");
+    }
+
 
 }

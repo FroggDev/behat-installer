@@ -1,25 +1,18 @@
 <?php
-namespace froggdev\BehatContexts\Context;
+namespace froggdev\BehatContexts\FeaturedContext;
 
-use froggdev\BehatContexts\Util\DialogBoxTrait;
-
-/**
- * Class DialogBoxContext
- * @package froggdev\BehatContexts\Context
- */
-trait DialogBoxContext
+trait AlertTrait
 {
-
-    ###########
-    # CONTEXT #
-    ###########
+    ################
+    # ACTION ALERT #
+    ################
 
     /**
      * @Then Je confirme
      */
     public function iClickOnTheAlertWindow(): void
     {
-        //Validate an alert if exist
+        //remove alerts if exist
         try {
             $this->getSession()->getDriver()->getWebDriverSession()->accept_alert();
         } catch (\Exception $exception) {}
@@ -53,6 +46,31 @@ trait DialogBoxContext
     public function hasAlert()
     {
         return $this->hasPopupMessage();
+    }
+
+    ##################
+    # FUNCTION ALERT #
+    ##################
+
+    /**
+     * @return bool
+     */
+    public function hasPopupMessage(): bool
+    {
+        // if session is not started can skip the screenshots
+        if( false===$this->getSession()->isStarted() ){
+            return false;
+        }
+
+        // try to read a popup if exist
+        try {
+            $this->getSession()->getDriver()->getWebDriverSession()->getAlert_text();
+        }catch(\Exception $e){
+            return false;
+        }
+
+        // all ok, mean a popup exist
+        return true;
     }
 
 }

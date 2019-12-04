@@ -1,21 +1,20 @@
 <?php
-namespace froggdev\BehatContexts\Context;
+namespace froggdev\BehatContexts\FeaturedContext;
 
 use Behat\Behat\Context\Context;
 use Behat\Behat\Hook\Scope\BeforeScenarioScope;
 use Behat\Mink\Exception\DriverException;
 use Behat\Mink\Exception\UnsupportedDriverActionException;
 use Behat\MinkExtension\Context\RawMinkContext;
-use froggdev\BehatContexts\Util\UserVarTrait;
+use froggdev\BehatContexts\Util\UserVarsTrait;
 
-abstract class AbstractUserVarContext extends RawMinkContext implements Context
+abstract class AbstractUserVarsContext extends RawMinkContext implements Context
 {
-
     ##########
     # TRAITS #
     ##########
 
-    use UserVarTrait;
+    use UserVarsTrait;
 
     ##########
     # EVENTS #

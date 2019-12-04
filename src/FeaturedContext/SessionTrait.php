@@ -1,12 +1,12 @@
 <?php
-namespace froggdev\BehatContexts\Context;
+namespace froggdev\BehatContexts\FeaturedContext;
 
-/**
- * Trait SessionContext
- * @package froggdev\BehatContexts\Context
- */
-trait SessionContext
+trait SessionTrait
 {
+    #########################
+    # ACTION SESSION/COOKIE #
+    #########################
+
     /**
      * @Given Le cookie ":nom_du_cookie" devrait être rempli avec la valeur "valeur_du_cookie"
      *

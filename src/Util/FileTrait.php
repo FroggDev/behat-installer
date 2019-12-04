@@ -1,28 +1,22 @@
 <?php
 namespace froggdev\BehatContexts\Util;
 
-/**
- * Trait FileTrait
- * @package froggdev\BehatContexts\Util
- */
 trait FileTrait
 {
 
     /**
-     * @param string $folder
-     * @return string
+     * @Then J'efface les anciens téléchargements
      */
-    private function setTrailingSlash(string $folder) : string
+    public function iDeleteOldDownloads(): void
     {
-        return rtrim($folder , '/') . '/';
+        $this->delTree($this->userVars['downloadPath'],false);
     }
 
     /**
      * @param string $dir
-     * @param bool $delMainDir
      * @return bool
      */
-    private function delTree(string $dir,bool $delMainDir=true): bool
+    public function delTree(string $dir,bool $delMainDir=true): bool
     {
         $files = @array_diff(@scandir($dir), array('.', '..'));
         if($files){
@@ -39,7 +33,7 @@ trait FileTrait
      * @param $filePath
      * @param $content
      */
-    private function writeTofile( $filePath , $content ): void
+    public function writeTofile( $filePath , $content ): void
     {
         $dir = @dirname($filePath);
 
@@ -55,6 +49,44 @@ trait FileTrait
         );
     }
 
+
+    /**
+     * @param string $file
+     * @param string $content
+     */
+    public function saveFileAsUTF8(string $file, string $content)
+    {
+        // Create the dir if not exist
+        $dir = dirname($file);
+        if (!file_exists($dir)) {
+            mkdir($dir, 0777, true);
+        }
+
+        // save as UTF 8 format
+        $f = fopen($file, "w");
+        # Now UTF-8 - Add byte order mark
+        fwrite($f, pack("CCC", 0xef, 0xbb, 0xbf));
+        fwrite($f, $content);
+        fclose($f);
+    }
+
+    /**
+     * @param string $url
+     * @return bool
+     */
+    public function fileUrlExist(string $url): bool
+    {
+        $file_headers = @get_headers($url);
+
+        return (!$file_headers || $file_headers[0] == 'HTTP/1.1 404 Not Found');
+
+        /* CURL VERSION :
+         * if (!$fp = curl_init($url)) return false;
+         * return true;
+         */
+
+    }
+
     /**
      * Copy a file, or recursively copy a folder and its contents
      *
@@ -66,7 +98,7 @@ trait FileTrait
      * @param       bool $silent
      * @return      bool     Returns TRUE on success, FALSE on failure
      */
-    private static function copyr(string $source,string $dest , bool $silent = true)
+    public static function copyr(string $source,string $dest , bool $silent = true)
     {
         // Check if source exist
         if (!file_exists($source) && $silent) {
@@ -104,4 +136,5 @@ trait FileTrait
         $dir->close();
         return true;
     }
+
 }

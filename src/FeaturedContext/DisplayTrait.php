@@ -1,20 +1,21 @@
 <?php
-namespace froggdev\BehatContexts\Context;
+namespace froggdev\BehatContexts\FeaturedContext;
 
 use Exception;
 
-/**
- * Trait DisplayContext
- * @package froggdev\BehatContexts\Context
- */
-trait DisplayContext
+trait DisplayTrait
 {
+    ##################
+    # ACTION DISPLAY #
+    ##################
+
     /**
      * Check if a text is present in a page
      *
      * @When Je devrai voir le texte ":texte"
      *
      * @param string $text
+     *
      * @throws Exception
      */
     public function iShouldSee(string $text) : void
@@ -34,6 +35,7 @@ trait DisplayContext
      * @When Il serait bien de voir le texte ":texte"
      *
      * @param string $text
+     *
      * @throws Exception
      */
     public function iMayShouldSee(string $text) : void
@@ -54,6 +56,7 @@ trait DisplayContext
      * @When Il serait bien de voir le texte ":texte" :case
      *
      * @param string $text
+     *
      * @throws Exception
      */
     public function iMayShouldSeeWithCase(string $text, string $case) : void
@@ -79,6 +82,8 @@ trait DisplayContext
             $this->setNotBlockingErrorOccured(sprintf('Cannot find the text "%s" in the page', $text));
         }
     }
+
+
 
     /**
      * Check if a text is not present in a page (trigger none blocking error)
@@ -107,6 +112,7 @@ trait DisplayContext
      * @When Je ne devrai pas voir le texte ":texte"
      *
      * @param string $text
+     *
      * @throws Exception
      */
     public function iShouldNotSee(string $text) : void
@@ -131,6 +137,7 @@ trait DisplayContext
      * @When Je devrai voir l'élément d'erreur ":selecteur_css"
      *
      * @param string $css
+     *
      * @throws Exception
      */
     public function iShouldSeeError(string $css): void
@@ -144,17 +151,19 @@ trait DisplayContext
         }
     }
 
+
     /**
      * @Given Si la variable ":var" égal ":val" alors je devrai voir le texte ":text"
      *
      * @param string $var
      * @param string $val
      * @param string $text
+     *
      * @throws Exception
      */
     public function checkTextIfVar($var,$val,$text)
     {
-        if( isset($this->userVars[$var]) && $this->userVars[$var]===$val){
+        if( isset($this->userVars[$var]) && $this->userVars[$var]==$val){
             $this->iShouldSee($text);
         }
     }

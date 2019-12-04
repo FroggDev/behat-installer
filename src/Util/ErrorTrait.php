@@ -1,33 +1,53 @@
 <?php
 namespace froggdev\BehatContexts\Util;
 
-use froggdev\BehatContexts\Config;
-
 trait ErrorTrait
 {
-    /** @var string error array separator */
+
+    /** @var string separateur du tableau des erreur */
     private $errSeparator = '_@_';
 
-    /** @var int nb not blocking error occured */
+    /** @var int nb d'erreur non bloquante */
     private $nbError = 0;
+
+    /**
+     * @When Je verifie si des erreurs non bloquantes sont survenues
+     *
+     * @throws \Exception
+     */
+    public function checkIfNotBlockingErrorOccured():void
+    {
+
+        // If not errors skip func
+        if( !isset( $this->userVars['notBlockingError'] ) || $this->userVars['notBlockingError']==="" ){
+            return;
+        }
+
+        $errs = explode($this->errSeparator , $this->userVars['notBlockingError']);
+
+        // Clean old not blocking errors
+        $this->userVars['notBlockingError']="";
+
+        //If error throw exception with report
+        if( count($errs)>0 ){
+            throw new \Exception( implode("\r\n" , $errs) );
+        }
+    }
 
     /**
      * Add an error to the list
      *
      * @param string $errMsg
      */
-    private function setNotBlockingErrorOccured(string $errMsg):void
+    public function setNotBlockingErrorOccured(string $errMsg):void
     {
-        $this->takeAScreenshots(
-            $this->reportPath . Config::SCREENSHOT_DIR_CUSTOM,
-            'ErreurNonBloquante-'.$this->nbError.'.png'
-        );
-
+        $this->iTakeAScreenShot('ErreurNonBloquante-'.$this->nbError.'.png');
 
         isset( $this->userVars['notBlockingError'] ) ? $this->userVars['notBlockingError'].= $this->errSeparator . $errMsg : $this->userVars['notBlockingError'] = $errMsg;
 
         echo "Minor error occured : $errMsg\n";
-
+        
         $this->nbError++;
     }
+
 }

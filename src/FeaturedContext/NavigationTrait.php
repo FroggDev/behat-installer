@@ -1,12 +1,13 @@
 <?php
-namespace froggdev\BehatContexts\Context;
+namespace froggdev\BehatContexts\FeaturedContext;
 
-/**
- * Trait NavigationContext
- * @package froggdev\BehatContexts\Context
- */
-trait NavigationContext
+trait NavigationTrait
 {
+
+    #####################
+    # ACTION NAVIGATION #
+    #####################
+
     /**
      * Require a sesssion
      * @When J'attend :duration secondes
@@ -129,4 +130,5 @@ trait NavigationContext
             $this->setNotBlockingErrorOccured(sprintf('Cannot clique on the text "%s"', $text));
         }
     }
+
 }

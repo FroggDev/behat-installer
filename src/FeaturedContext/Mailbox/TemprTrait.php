@@ -1,11 +1,11 @@
 <?php
-namespace froggdev\BehatContexts\Context\Mailbox;
+namespace froggdev\BehatContexts\FeaturedContext\Mailbox;
 
 /**
- * Trait TemprContext
- * @package froggdev\BehatContexts\Context\Mailbox
+ * Trait TemprTrait
+ * @package froggdev\BehatContexts\FeaturedContext\Mailbox
  */
-trait TemprContext
+trait TemprTrait
 {
     /**
      * @Given Je me connecte sur Tempr.email avec le compte ":email"

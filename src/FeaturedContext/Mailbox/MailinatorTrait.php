@@ -1,7 +1,7 @@
 <?php
-namespace froggdev\BehatContexts\Context\Mailbox;
+namespace froggdev\BehatContexts\FeaturedContext\Mailbox;
 
-trait MailinatorContext
+trait MailinatorTrait
 {
     /**
      * @Given Je me connecte sur Mailinator avec le compte ":email"
