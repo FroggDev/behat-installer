@@ -1,0 +1,45 @@
+default:
+    suites:
+        default:
+            contexts:
+                - FeatureContext:
+                    kernel: '@kernel'
+                - froggdev\BehatContexts\Context:
+                    - exportPath: d:\test\
+                    - reportPath: public/output/behat
+                    - doScreenshot: true
+                    - doMail: true
+                    - smtp: messagerie.uniprevoyance.intraxa
+                    - smtpPort: 25
+                    - mailFrom: 'behat@uniprevoyance.fr'
+                    - mailTo: 'remy.marsiglietti-prestataire@uniprevoyance.fr'
+
+    extensions:
+
+        Behat\Symfony2Extension:
+            kernel:
+                bootstrap: features/bootstrap/bootstrap.php
+                class: App\Kernel
+
+        # Browser
+        Behat\MinkExtension:
+            base_url:
+            files_path: dev
+            browser_name: chrome
+            goutte: ~
+            selenium2: ~
+            sessions: ~
+
+        # HTML Rendering
+        emuse\BehatHTMLFormatter\BehatHTMLFormatterExtension:
+              name: html
+              renderer: Twig
+              file_name: index
+              print_args: true
+              print_outp: true
+              loop_break: true
+
+    formatters:
+        pretty:
+        html:
+            output_path: '%paths.base%/public/output/behat'
