@@ -15,7 +15,7 @@
 			"behat/mink-extension": "dev-master",
 			"behat/mink": "dev-master",
 			"emuse/behat-html-formatter": "dev-master"
-    }
+    },
     "autoload": {
         "psr-4": {
             "froggdev\\BehatContexts\\": "src/"
