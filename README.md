@@ -48,5 +48,5 @@ if ( null !== $definition->getFile() && ''!==$definition->getFile()&& __DIR__.'/
 ## Todo list
 - [ ] Translation
 - [ ] Replace :value to RegExp
-- [ ] Do more advance scenario
+- [ ] Do more advanced scenario
 - [ ] Add demo with BeHat TAG sample
