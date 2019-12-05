@@ -10,24 +10,24 @@ trait NavigationTrait
 
     /**
      * Require a sesssion
-     * @When J'attend :duration secondes
-     *
-     * @param $duration
-     */
-    public function iWaitSec($duration): void
-    {
-        $this->getSession()->wait($duration * 1000);
-    }
-
-    /**
-     * Require a sesssion
-     * @When J'attend :duration millisecondes
+     * @When J'attends :duration millisecondes
      *
      * @param $duration
      */
     public function iWaitMilliSec($duration): void
     {
-        $this->getSession()->wait($duration );
+        $this->getSession()->wait($duration);
+    }
+		
+    /**
+     * Require a sesssion
+     * @When J'attends :duration secondes
+     *
+     * @param $duration
+     */
+    public function iWaitSec($duration): void
+    {				
+        $this->getSession()->wait($duration*1000);
     }
 
     /**
@@ -38,7 +38,7 @@ trait NavigationTrait
      */
     public function iPauseForSec($duration): void
     {
-        sleep($duration );
+        sleep($duration);
     }
 
     /**
@@ -52,7 +52,7 @@ trait NavigationTrait
         $uri = $this->replaceUserVar($uri);
 
         // check if start with http else add server to uri
-        $this->visit( substr( $uri, 0, 4 ) === "http" ? $uri : $this->userVars['server'] . $uri );
+        $this->getSession()->visit( $this->getFullUrl($uri) );
     }
 
     /**
@@ -64,7 +64,10 @@ trait NavigationTrait
     public function iShouldBeOnPage(string $url): void
     {
         // replace uservar in param
-        $exprectedUrl = $this->userVars['server'] . $this->replaceUserVar($url);
+        $exprectedUrl = $this->replaceUserVar($url);
+
+				// get full url if just uri is passed
+				$exprectedUrl = $this->getFullUrl($exprectedUrl);
 
         // current url
         $url = $this->getSession()->getCurrentUrl();
@@ -98,7 +101,6 @@ trait NavigationTrait
     {
         $this->getFirstVisibleElement('css',$css)->focus();
     }
-
 
     /**
      * @When Je clique sur ":text"

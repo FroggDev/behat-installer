@@ -23,10 +23,8 @@ trait DisplayTrait
         // replace uservar in param
         $text = $this->replaceUserVar($text);
 
-        // check if text exist in the page
-        if( strpos( $this->getSession()->getPage()->getText(),$text ) === false ){
+				if(!$this->textExistInPage($text))
             throw new Exception(sprintf('Cannot find the text "%s" in the page', $text));
-        }
     }
 
     /**
@@ -44,7 +42,7 @@ trait DisplayTrait
         $text = $this->replaceUserVar($text);
 
         // check if text exist in the page
-        if( strpos( $this->getSession()->getPage()->getText(),$text ) === false ){
+        if( !$this->textExistInPage($text) ){
             // Erreur non bloquante
             $this->setNotBlockingErrorOccured(sprintf('Cannot find the text "%s" in the page', $text));
         }
@@ -77,13 +75,8 @@ trait DisplayTrait
         }
 
         // check if text exist in the page
-        if( strpos( $this->getSession()->getPage()->getText(),$text ) === false ){
-            // Erreur non bloquante
-            $this->setNotBlockingErrorOccured(sprintf('Cannot find the text "%s" in the page', $text));
-        }
+        $this->iMayShouldSee($text);
     }
-
-
 
     /**
      * Check if a text is not present in a page (trigger none blocking error)
@@ -100,7 +93,7 @@ trait DisplayTrait
         $text = $this->replaceUserVar($text);
 
         // check if text exist in the page
-        if( strpos( $this->getSession()->getPage()->getText(),$text ) !== false ){
+        if( $this->textExistInPage($text) ){
             // Erreur non bloquante
             $this->setNotBlockingErrorOccured(sprintf('Found the text "%s" in the page but should not', $text));
         }
@@ -120,13 +113,8 @@ trait DisplayTrait
         // replace uservar in param
         $text = $this->replaceUserVar($text);
 
-        $element = $this->getSession()->getPage()->find('xpath', '//*[contains(text(), "'.$text.'")]');
-
-        // si n existe pas tout est ok
-        if($element==null) return;
-
         // si existe alors doit etre invisible
-        if($element->isVisible()){
+        if($this->textExistInPage($text)){
             throw new Exception(sprintf('"%s" has been found in the page and should not', $text));
         }
     }

@@ -6,6 +6,24 @@ use Exception;
 
 trait UtilTrait
 {
+    /**
+     * @Given J'affiche un message dans la console ":text"
+     */
+    public function displayInConsole(string $text)
+    {
+			$text = $this->replaceUserVar($text);
+			
+			echo "\n$text\n";
+		}
+	
+    /**
+     * @param string $uriOrUrl
+     * @return string
+     */
+		public function getFullUrl(string $uriOrUrl)
+		{
+			return substr( $uriOrUrl, 0, 4 ) === "http" ? $uriOrUrl : $this->getMinkParameter('base_url') . '/' . $uriOrUrl;
+		}
 
     /**
      * @param string $text
@@ -231,5 +249,17 @@ JS;
             ->getPage()
             ->find('css', "[name=\"".$name."\"]");
     }
+
+		public function textExistInPage(string $text): bool
+		{
+        // check if text exist in the page
+        if( strpos( $this->getSession()->getPage()->getText(),$text ) === false ){
+					// If not found then get node element and check  into values elements
+					$node = $this->getSession()->getPage()->find( 'css', "*[value='$text']" );					
+					return $node!==null;
+				}
+				
+				return true;
+		}
 
 }

@@ -7,66 +7,7 @@ trait UserVarsTrait
     # VARS
     #-----
 
-    /** @var array where user vars are saved */
-    public $userVars;
-
 		private $tmpFile='./test.tmp';
-
-    ##################
-    # ACTION SETTERS #
-    ##################
-
-    /**
-     * @Given Je defini que ":clef" vaut ":valeur"
-     *
-     * @param string $key
-     * @param string $value
-     */
-    public function setVar(string $key , string $value): void
-    {
-        $this->userVars[$key] = $this->replaceUserVar($value);
-    }
-
-    /**
-     * @Given Je defini que ":clef" vaut la valeur du champ ":css"
-     *
-     * @param string $key
-     * @param string $css
-     */
-    public function setVarFromInput(string $key , string $css): void
-    {
-        $this->userVars[$key] = $this
-            ->getSession()
-            ->getPage()
-            ->find('css', $css)
-            ->getAttribute('value');
-    }
-
-    /**
-     * @Given Je defini que ":clef" vaut la valeur du champ ":css" en javascript
-     *
-     * @param string $key
-     * @param string $css
-     */
-    public function setVarFromInputJS(string $key , string $css): void
-    {
-        $this->userVars[$key] = $this
-             ->getSession()
-            ->getDriver()
-            ->evaluateScript("function(){ return document.querySelector('" . $css . "').value; }()");
-    }
-
-    /**
-     * @Given J'efface les anciennes variables
-     */
-    public function iCleanOldVars(): void
-    {
-        // Suppression du fichier
-        @unlink('./test.tmp');
-
-        // Nettoyage de la variable
-        $this->userVars=[];
-    }
 
     #################################
     # FUNCTION USER VARS MANAGEMENT #
@@ -184,7 +125,6 @@ trait UserVarsTrait
         }
         return $res;
     }
-
 
     /**
      * Only one value set

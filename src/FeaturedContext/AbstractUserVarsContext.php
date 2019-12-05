@@ -16,6 +16,13 @@ abstract class AbstractUserVarsContext extends RawMinkContext implements Context
 
     use UserVarsTrait;
 
+    ########
+    # VARS #
+    ########
+
+    /** @var array where user vars are saved */
+    public $userVars;
+
     ##########
     # EVENTS #
     ##########
