@@ -12,8 +12,6 @@ use froggdev\BehatContexts\Config;
 trait RepportTrait
 {
 
-		private $fullPath;
-
     /**
      * @Given J'efface les anciens rapports behat
      */
@@ -27,65 +25,49 @@ trait RepportTrait
      */
     public function ISaveTheRepport(): void
     {
-			$retulstPath = $this->reportPath;
-			
 			if($this->exportPath){
 
         // create main folder
         $currentDate = new \DateTime();
         $currentRepport = $currentDate->format('Y-m-d');
-        $this->fullPath = $this->exportPath.'\\'.$currentRepport. '\\' . $currentDate->format('His') . '_' . $this->getMinkParameter('files_path') . '-' . $this->getMinkParameter('browser_name');
-				$retulstPath = $this->fullPath;
-				
+        $fullPath = $this->exportPath.'/'.$currentRepport. '/' . $currentDate->format('His') . '_' . $this->getMinkParameter('files_path') . '-' . $this->getMinkParameter('browser_name');
+
         // Create files
-        mkdir($this->fullPath,0777 , true);
+        mkdir($fullPath,0777 , true);
 
         // Copy folders
-        self::copyr( $this->reportPath ,$this->fullPath );
+        self::copyr( $this->reportPath ,$fullPath );
 
         // Get main script path
         $mainPath=str_replace('/features/bootstrap/FeaturedContext/', "",__DIR__);
         //read the entire string
-        $str=file_get_contents($this->fullPath.'/index.html');
+        $str=file_get_contents($fullPath.'/index.html');
         //remove the file path
         $str=str_replace('file://' . $mainPath . $this->exportPath, "",$str);
         //write the entire string
-        file_put_contents($this->fullPath.'/index.html', $str);
+        file_put_contents($fullPath.'/index.html', $str);
 
         // Zip + Delete file if no errors
         if( !$this->hasError ) {
             // Zip the files
-            HZip::zipDir($this->fullPath,  $this->fullPath.'.zip');
+            HZip::zipDir($fullPath,  $fullPath.'.zip');
             // Clean folder
-            $this->delTree($this->fullPath );
-						
-						$retulstPath = $this->fullPath.'.zip';
+            $this->delTree($fullPath );
         }
-				
-				$this->iCleanOldRepport();
 			}
 
 			$this->ISendMail(!$this->hasError);
 
-			$this->displayInConsole("Rapport disponible dans " . $retulstPath);
-
-			
+			$this->iCleanOldRepport();
     }
 
     /**
      * @Given J'envoie un mail
      */
-    public function ISendMail(bool $ok=true,array $infos=[]):void
+    public function ISendMail(bool $ok=true):void
     {	
-				if(!$this->doMail) {
-					$this->displayInConsole("Information: les mails sont désactivés dans la configuration");
-					return;
-				}
+			if(!$this->doMail) return;
 
-				$from = $infos['from']??$this->mailFrom;
-				$to = $infos['to']??$this->mailFrom;
-				$subject =  $infos['subject']??(($ok ? '[OK]' : '[ERREUR]') . ' Résultat des tests fonctionnels BeHat');
-				$body =  $infos['body']??'Le rapport est disponible à l\'adresse suivant : ' .  ($this->exportPath ? $this->fullPath.($ok ? '.zip' : '') : $this->reportPath);
 
         try {
             $mail = new PHPMailer\PHPMailer();
@@ -94,12 +76,12 @@ trait RepportTrait
             $mail->Host = $this->smtp; 			// SMTP server example
             $mail->SMTPDebug = 0;           // enables SMTP debug information (for testing)
             $mail->SMTPAuth = false;        // enable SMTP authentication
-            $mail->Port = $this->smtpPort;  // set the SMTP port
+            $mail->Port = $this->smtpPort;  // set the SMTP port for the GMAIL server
             $mail->SMTPDebug = 0;
 
             //Recipients
-            $mail->setFrom($from);
-            $mail->addAddress($to);
+            $mail->setFrom($this->mailFrom);
+            $mail->addAddress($this->mailTo);
 						/*
             $mail->setFrom('Behat-test@uniprevoyance.fr', 'Behat-test');
             $mail->addAddress('Remy.MARSIGLIETTI-prestataire@uniprevoyance.fr', 'MARSIGLIETTI Remy');     // Add a recipient
@@ -120,9 +102,9 @@ trait RepportTrait
 
             //Content
             $mail->isHTML(true);                                  // Set email format to HTML
-            $mail->Subject = $subject;
+            $mail->Subject = ($ok ? '[OK]' : '[ERREUR]') . ' Résultat des tests fonctionnels BeHat';
 						
-            $mail->Body = $body;
+            $mail->Body = 'Le rapport est disponible à l\'adresse suivant : ' .  ($this->exportPath ? $this->exportPath : $this->reportPath);
             //$mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
             if(!$mail->Send()) {
@@ -133,17 +115,4 @@ trait RepportTrait
             echo $e->getMessage();
         }
     }
-		
-    /**
-     * @Given J'envoie un mail de ":from" à ":to" avec pour sujet ":subject" et message ":body"
-     */
-    public function ISendMailData(string $from, string $to, string $subject, string $body):void
-		{			
-			$this->ISendMail(true,[
-				'from' => $this->replaceUserVar($from),
-				'to' => $this->replaceUserVar($to),
-				'subject' => $this->replaceUserVar($subject),
-				'body' => $this->replaceUserVar($body),				
-			]);			
-		}
 }
