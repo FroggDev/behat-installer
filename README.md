@@ -19,6 +19,10 @@ Using symfony.exe
 ```
 Symfony new ./ --version=4.4
 ```
+Or with composer create-project command
+```
+composer create-project symfony/skeleton ./ 4.4.99
+```
 **Stability**
 
 ATM require minimum-stability dev
