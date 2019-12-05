@@ -13,7 +13,7 @@
         "php": ">=7.1.3",
         "ext-zip": "*",
         "behat/behat": "~3.5",
-        "froggdev/mink": "dev-master",
+        "FroggDev/Mink": "dev-master",
         "behat/mink-extension": "~2.3",
         "emuse/behat-html-formatter": "~0.2",
         "behat/symfony2-extension": "~2.1",
