@@ -42,7 +42,7 @@ You may experiment trouble with vendor\symfony\dependency-injection\ContainerBui
 actually i didn't found how to solve it in the clean way (this error does not come from my package but dependencies)
 so the work arround is to edit the error line and add a test like:
 ```
-if ( null !== $definition->getFile() && ''!==$definition->getFile()&& __DIR__.'/'!==$definition->getFile() ) {
+if ( null !== $definition->getFile() && ''!==$definition->getFile()&& getcwd().'/'!==$definition->getFile() ) {
 ```
 
 ## Todo list
