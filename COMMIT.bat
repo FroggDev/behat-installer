@@ -1,6 +1,8 @@
 @echo off
 set /p msg=Commit message:
 
+git pull
+
 git add .
 
 git commit -m "%msg%"
