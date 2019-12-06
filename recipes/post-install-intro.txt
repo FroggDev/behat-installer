@@ -1,0 +1,12 @@
+<info>This script will install all the stuff required to have BeHat working with Selenium.</>
+
+<info>Installation:</>
+    Add new context for BeHat.
+    Add a working selenium for IE & Chrome.
+    Add advanced demo with selenium.
+
+<info>Functionnalities:</>
+    Create a HTML Report once tests are done.
+    <comment>(Optionnal)</> Send mail once tests are done.
+    <comment>(Optionnal)</> Copy the report to a specified path.
+    <comment>(Optionnal)</> Take a screenshot for each actions.

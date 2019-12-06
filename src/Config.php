@@ -7,6 +7,7 @@ Abstract class Config
 		 * Default values
 		 */
 		const	DO_SCREENSHOT = true;
+		const	DO_EXPORT = true;
 		const	EXPORT_PATH = null;
 		const	DO_MAIL = true;
 		const	MAIL_FROM = null;

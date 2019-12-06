@@ -72,7 +72,6 @@ class Context extends AbstractUserVarsContext
 
 		//TODO COMMENTS
 		private $exportPath;
-		
 
     private $doMail;
 
@@ -83,6 +82,8 @@ class Context extends AbstractUserVarsContext
 		private $smtp;
 
 		private $smtpPort;
+
+		private $doExport;
 
 		private $hasError=false;
 
@@ -112,6 +113,8 @@ class Context extends AbstractUserVarsContext
 			$this->doScreenshot = $params['doScreenshot']??Config::DO_SCREENSHOT;
 			
 			$this->reportPath = $params['reportPath']??Config::REPORT_PATH;
+			
+			$this->doExport = $params['doExport']??Config::DO_EXPORT;
 			
 			$this->exportPath = $params['exportPath']??Config::EXPORT_PATH;
 			
