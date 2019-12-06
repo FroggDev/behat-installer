@@ -1,4 +1,10 @@
-    Run <comment>vendor/bin/behat -dl</> to list the available commands.
+Next for Behat:
+    Run vendor/bin/behat to run the demo tests.
+		Run <comment>vendor/bin/behat -dl</> to list the available commands.
     Run <comment>vendor/bin/behat --config-reference</> to list the available configurations.
     Run <comment>vendor/bin/behat -p ie</> to run BeHat with Internet Explorer using profiles.		
+		
+TODO :		
+A script as been set 
+Run vendor/bin/behat
 

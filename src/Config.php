@@ -1,7 +1,7 @@
 <?php
 namespace froggdev\BehatContexts;
 
-class Config
+Abstract class Config
 {
 		/**
 		 * Default values
@@ -31,5 +31,16 @@ class Config
     const SCREENSHOT_DIR_CUSTOM = 'screenshotsCustom';
 
 
+		/**
+		 * Package informations (for the installer)
+		 */
+		const PACKAGE_PATH = 'vendor/froggdev/behat-contexts';
+		
+		const PACKAGE_FILES = [
+			'features' => 'features',
+			'behat.yml.dist' => 'behat.yml.dist'
+		];
+		
+		const PACKAGE_MESSAGE = 'post-install.txt';
 
 }
