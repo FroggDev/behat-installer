@@ -1,6 +1,6 @@
 <info>Next for Behat:</>
-    Run <comment>vendor/bin/selenium</> to run selenium (required for behat with browser).
-    Run <comment>vendor/bin/behat</> to run behat.
-    Run <comment>vendor/bin/behat -dl</> to list the available commands.
-    Run <comment>vendor/bin/behat --config-reference</> to list the available configurations.
-    Run <comment>vendor/bin/behat -p ie</> to run BeHat with Internet Explorer using profiles.		
+    Run <comment>vendor\bin\selenium</> to run selenium (required for behat with browser).
+    Run <comment>vendor\bin\behat</> to run behat.
+    Run <comment>vendor\bin\behat -dl</> to list the available commands.
+    Run <comment>vendor\bin\behat --config-reference</> to list the available configurations.
+    Run <comment>vendor\bin\behat -p ie</> to run BeHat with Internet Explorer using profiles.		
