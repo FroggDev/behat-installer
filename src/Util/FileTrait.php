@@ -11,4 +11,6 @@ trait FileTrait
   {
       $this->delTree($this->userVars['downloadPath'],false);
   }
+ 
+}
    

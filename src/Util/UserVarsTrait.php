@@ -1,6 +1,8 @@
 <?php
 namespace froggdev\BehatInstaller\Util;
 
+use froggdev\PhpUtils\FileUtil;
+
 trait UserVarsTrait
 {
 
@@ -18,7 +20,7 @@ trait UserVarsTrait
      */
     public function setUserVars(): void
     {
-        $this->writeTofile(
+        FileUtil::writeTofile(
             $this->tmpFile,
             serialize($this->userVars)
         );

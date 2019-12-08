@@ -1,6 +1,8 @@
 <?php
 namespace froggdev\BehatInstaller\FeaturedContext;
 
+use froggdev\PhpUtils\FileUtil;
+
 trait DebugTrait
 {
     /**
@@ -25,7 +27,7 @@ trait DebugTrait
     {
         $page = $this->getSession()->getPage()->getContent();
 
-        $this->writeTofile( $fichier , $page );
+        FileUtil::writeTofile( $fichier , $page );
     }
 }
 

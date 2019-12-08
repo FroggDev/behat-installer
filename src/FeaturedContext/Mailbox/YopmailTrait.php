@@ -53,6 +53,8 @@ trait YopmailTrait
 
         $this->iClickSelector('A.igif.lmen_all');
 
+        $this->iWaitMilliSec(300);
+        
         $this->iShouldSee('Aucun message pour');
     }
 

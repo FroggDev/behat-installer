@@ -2,6 +2,7 @@
 namespace froggdev\BehatInstaller\FeaturedContext;
 
 use froggdev\BehatInstaller\Config;
+use froggdev\PhpUtils\FileUtil;
 
 trait ScreenshotsTrait
 {
@@ -102,7 +103,7 @@ trait ScreenshotsTrait
         $fileName = preg_replace('/\W/', '', $fileName);
 
         // save the screenshots and save as the previously defined filename
-        $this->writeTofile(
+        FileUtil::writeTofile(
             $path . '/' . $folder . '/' . $fileName . '.png',
             $screenshots
         );

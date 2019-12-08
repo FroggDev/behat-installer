@@ -8,6 +8,8 @@ require( __DIR__ . '/../Tool/PHPMailer/Exception.php');
 use PHPMailer\PHPMailer;
 use froggdev\BehatInstaller\Tool\HZip;
 use froggdev\BehatInstaller\Config;
+use froggdev\PhpUtils\FileUtil;
+use froggdev\PhpUtils\StringUtil;
 
 trait RepportTrait
 {
@@ -17,7 +19,7 @@ trait RepportTrait
      */
     public function iCleanOldRepport(): void
     {
-        $this->delTree( Config::REPORT_PATH );
+        FileUtil::delTree( Config::REPORT_PATH );
     }
 
     /**
@@ -36,7 +38,7 @@ trait RepportTrait
         mkdir($fullPath,0777 , true);
 
         // Copy folders
-        self::copyr( $this->reportPath ,$fullPath );
+        FileUtil::copyr( $this->reportPath ,$fullPath );
 
         // Get main script path
         $mainPath=str_replace('/features/bootstrap/FeaturedContext/', "",__DIR__);
@@ -52,13 +54,13 @@ trait RepportTrait
             // Zip the files
             HZip::zipDir($fullPath,  $fullPath.'.zip');
             // Clean folder
-            $this->delTree($fullPath );
+            FileUtil::delTree($fullPath );
         }
 			}
 
 			$this->ISendMail(!$this->hasError);
 
-			$this->iCleanOldRepport();
+			//$this->iCleanOldRepport();
     }
 
     /**
@@ -79,9 +81,11 @@ trait RepportTrait
             $mail->Port = $this->smtpPort;  // set the SMTP port for the GMAIL server
             $mail->SMTPDebug = 0;
 
-            //Recipients
+            //Sender
             $mail->setFrom($this->mailFrom);
-            $mail->addAddress($this->mailTo);
+            //Recipients
+            $mailTos = StringUtil::split($this->mailTo,';');
+            foreach($mailTos as $value) $mail->addAddress($value);
 						/*
             $mail->setFrom('Behat-test@uniprevoyance.fr', 'Behat-test');
             $mail->addAddress('Remy.MARSIGLIETTI-prestataire@uniprevoyance.fr', 'MARSIGLIETTI Remy');     // Add a recipient

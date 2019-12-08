@@ -21,9 +21,6 @@ class Context extends AbstractUserVarsContext
     #########
     use Util\ErrorTrait;
     use Util\FileTrait;
-    use Util\DateTrait;
-		use Util\StringTrait;
-		use Util\MathTrait;
 		use Util\UtilTrait;
 		
     #############
@@ -91,7 +88,7 @@ class Context extends AbstractUserVarsContext
     # CONSTRUCTOR #
     ###############
 
-    public function __construct(?array $param0=null,?array $param1=null,?array $param2=null,?array $param3=null,?array $param4=null,?array $param5=null,?array $param6=null,?array $param7=null)
+    public function __construct(?array $param0=null,?array $param1=null,?array $param2=null,?array $param3=null,?array $param4=null,?array $param5=null,?array $param6=null,?array $param7=null,?array $param8=null,?array $param9=null,?array $param10=null,?array $param11=null)
     {
 			// Convert arguments to one array params
 			$params=[];

@@ -121,7 +121,7 @@ class InstallCommand extends Command
 					// Set the user configuration
 					$this->configuration();
           // Display the result message 
-          $this->messageFromFile($this->recepiesDir.'/'.Config::PACKAGE_MESSAGE);
+          $this->result();
 				}
 			catch(\Exception $e){
 					$this->output->error( $e->getMessage() );
@@ -132,7 +132,10 @@ class InstallCommand extends Command
 			return self::EXITCODE;
     }
 		
-		
+    #########
+    # STEPS #
+    #########
+    
 		private function configuration():void 
 		{
 				// title
@@ -202,9 +205,6 @@ class InstallCommand extends Command
 
       // update the configuration
       FileUtil::regReplaceYamlConfigFile(Config::PACKAGE_FILES['behat.yml.dist'],$configs);
-			
-			// result
-			$this->output->success(Config::PACKAGE_NAME . ' successfully configurated');
 		}
 		
 		private function copyFiles(): void
@@ -223,17 +223,15 @@ class InstallCommand extends Command
 					FileUtil::copyr( $this->recepiesDir . $fileFrom , $fileTo);
         }
 			}			
-			
-			// result
-			$this->output->success(Config::PACKAGE_NAME . ' files copied');
-		}
-		
+		}		
 		
 		private function fixDependencyInjection(): void
 		{
 			// title
 			$this->setTitle('Updating Symfony Dependcy Injection');
 
+      $this->output->writeln('fixing <info>' . $this->containerBuilderPath .'</>');
+      
 			// read the entire string
 			$fileContent=file_get_contents($this->containerBuilderPath);
 
@@ -246,10 +244,21 @@ class InstallCommand extends Command
 
 			// write the entire string
 			file_put_contents($this->containerBuilderPath, $fileContent);
+		}
+
+    private function result():void
+    {
+      $this->setTitle('Result');
 
 			// result
-			$this->output->success('Symfony Dependcy Injection Fix applied');
-		}
+			$this->output->success(Config::PACKAGE_NAME . ' successfully installed');
+      
+      $this->messageFromFile($this->recepiesDir.'/'.Config::PACKAGE_MESSAGE);      
+    }
+
+    #########
+    # UTILS #
+    #########
 		
 		private function setTitle(string $title)
 		{
@@ -257,11 +266,10 @@ class InstallCommand extends Command
 			
 			$this->output->section( 'Step ' . $this->currentStep . '] ' . $title);			
 		}
-		
+    
 		private function messageFromFile(string $file)
-		{
-			
+		{			
 			$this->output->writeln(file_get_contents($file));
 		}
-
+		
 }
