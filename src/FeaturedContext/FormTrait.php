@@ -1,5 +1,5 @@
 <?php
-namespace froggdev\BehatContexts\FeaturedContext;
+namespace froggdev\BehatInstaller\FeaturedContext;
 
 use Behat\Gherkin\Node\TableNode;
 use Behat\Mink\Element\NodeElement;

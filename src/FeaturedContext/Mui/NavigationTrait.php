@@ -1,5 +1,5 @@
 <?php
-namespace froggdev\BehatContexts\FeaturedContext\Mui;
+namespace froggdev\BehatInstaller\FeaturedContext\Mui;
 
 trait NavigationTrait
 {

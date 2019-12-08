@@ -1,13 +1,13 @@
 <?php
-namespace froggdev\BehatContexts\FeaturedContext;
+namespace froggdev\BehatInstaller\FeaturedContext;
 
 require( __DIR__ . '/../Tool/PHPMailer/PHPMailer.php');
 require( __DIR__ . '/../Tool/PHPMailer/SMTP.php');
 require( __DIR__ . '/../Tool/PHPMailer/Exception.php');
 
 use PHPMailer\PHPMailer;
-use froggdev\BehatContexts\Tool\HZip;
-use froggdev\BehatContexts\Config;
+use froggdev\BehatInstaller\Tool\HZip;
+use froggdev\BehatInstaller\Config;
 
 trait RepportTrait
 {

@@ -1,5 +1,5 @@
 <?php
-namespace froggdev\BehatContexts\FeaturedContext;
+namespace froggdev\BehatInstaller\FeaturedContext;
 
 use Behat\Mink\Element\DocumentElement;
 use Behat\Mink\Session;

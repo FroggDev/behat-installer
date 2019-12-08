@@ -1,9 +1,9 @@
 <?php
-namespace froggdev\BehatContexts\FeaturedContext\Mailbox;
+namespace froggdev\BehatInstaller\FeaturedContext\Mailbox;
 
 /**
  * Trait TemprTrait
- * @package froggdev\BehatContexts\FeaturedContext\Mailbox
+ * @package froggdev\BehatInstaller\FeaturedContext\Mailbox
  */
 trait TemprTrait
 {

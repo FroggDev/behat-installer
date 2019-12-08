@@ -1,11 +1,11 @@
 <?php
-namespace froggdev\BehatContexts;
+namespace froggdev\BehatInstaller;
 
 use Behat\Behat\Hook\Scope\AfterStepScope;
 use Behat\Behat\Hook\Scope\BeforeScenarioScope;
 use Behat\Gherkin\Node\ScenarioInterface as Scenario;
-use froggdev\BehatContexts\Config;
-use froggdev\BehatContexts\FeaturedContext\AbstractUserVarsContext;
+use froggdev\BehatInstaller\Config;
+use froggdev\BehatInstaller\FeaturedContext\AbstractUserVarsContext;
 		
 /**
  * Class Context

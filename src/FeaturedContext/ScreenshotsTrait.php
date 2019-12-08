@@ -1,7 +1,7 @@
 <?php
-namespace froggdev\BehatContexts\FeaturedContext;
+namespace froggdev\BehatInstaller\FeaturedContext;
 
-use froggdev\BehatContexts\Config;
+use froggdev\BehatInstaller\Config;
 
 trait ScreenshotsTrait
 {

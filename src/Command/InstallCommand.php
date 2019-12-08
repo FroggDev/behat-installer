@@ -1,7 +1,7 @@
 <?php
 namespace App\Command;
 /*
- * This file is part of the Froggdev-BeHat-Context.
+ * This file is part of the Froggdev-BeHat-Installer.
  *
  * (c) Frogg <admin@frogg.fr>
  *
@@ -10,7 +10,7 @@ namespace App\Command;
  *
  * Command :
  * ---------
- * php bin/console froggdev:BehatContexts:install 
+ * php bin/console behat:install 
  * STYLES :
  * ------
  */
@@ -22,7 +22,8 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
-use froggdev\BehatContexts\Config;
+use froggdev\BehatInstaller\Config;
+use froggdev\PhpUtils\FileUtil;
 
 /**
  * @author Frogg <admin@frogg.fr>
@@ -33,7 +34,7 @@ use froggdev\BehatContexts\Config;
 class InstallCommand extends Command
 {
     /** @const int EXITCODE the normal code returned when exit the command */
-    public const EXITCODE = 0;
+    private const EXITCODE = 0;
     /** @var SymfonyStyle */
     private $output;
     /** @var Application */
@@ -48,8 +49,6 @@ class InstallCommand extends Command
 		private $recepiesDir;
 		/** @var string */
 		private $containerBuilderPath;
-		
-		use \froggdev\BehatContexts\Util\FileTrait;
 		
     /**
      * /!\        DO NOT USE CONTRUCTOR IN COMMANDS      /!\
@@ -103,32 +102,32 @@ class InstallCommand extends Command
      * @return int
      */
     private function install()
-    {
+    {      
 			$this->output->title('Welcome to the Froggdev Behat Contexts installer');
 			$this->output->newLine();
 
-
+      // warn about the install
+      $this->output->warning('The install will overwrite default BeHat context & configuration, if you already modified thoose file you may lost your modifications');
+      $this->output->confirm('Do you want to continue ?',true);
+      
 			// Display the message intro
 			$this->messageFromFile($this->recepiesDir.'/'.Config::PACKAGE_INTRO);
 				
-			try{					
-
-					/*
+			try{
 					// Fix dependency injection
 					$this->fixDependencyInjection();
 					// Copy required recipies files
 					$this->copyFiles();					
-					*/
 					// Set the user configuration
-					//$this->configuration();
-
+					$this->configuration();
+          // Display the result message 
+          $this->messageFromFile($this->recepiesDir.'/'.Config::PACKAGE_MESSAGE);
 				}
 			catch(\Exception $e){
 					$this->output->error( $e->getMessage() );
+          
+          $this->output->error( 'Installation has failed...' );
 			}
-
-			// Display the message finish
-			$this->messageFromFile($this->recepiesDir.'/'.Config::PACKAGE_MESSAGE);
 
 			return self::EXITCODE;
     }
@@ -140,66 +139,69 @@ class InstallCommand extends Command
 				$this->setTitle(Config::PACKAGE_NAME . ' configuration');
 				
 				//Init vars
-				$exportPath='';
-				$smtp = '';
-				$smtpPort = '';	
-				$mailFrom = '';
-				$mailTo = '';
-				
+				$configs['exportPath']='';
+				$configs['smtp'] = '';
+				$configs['smtpPort'] = '';	
+				$configs['mailFrom'] = '';
+				$configs['mailTo'] = '';
+
 				// Ask for user configuration
 				$confirmedFull = false;
 				while( $confirmedFull===false ){
 				
+					// Ask user confirmation for report
+					$confirmed=false;
+					while($confirmed===false){
+						$configs['reportPath'] = $this->output->ask('Please specify the HTML report path',Config::REPORT_PATH);	
+						$confirmed = $this->output->confirm('Confirm HTML report path configuration: '.$configs['reportPath'].' ?',true);
+					}
+          
 					// Ask user confirmation screenshot for each action
-					$doScreenshot = $this->output->confirm('Take a screenshot for each action ?',true);
+					$configs['doScreenshot'] = json_encode($this->output->confirm('Take a screenshot for each action ?',true));
 				
 					// Ask user confirmation for export
 					$confirmed=false;
 					while($confirmed===false){
-						$doExport = $this->output->confirm('Move report files when tests are complete in a specified folder ?',true);
-						if($doExport) $exportPath = $this->output->ask('Please specify the export path destination');	
-						$confirmed = !$doExport ? true : $this->output->confirm('Confirm export path configuration: '.$exportPath.' ?',true);
+						$configs['doExport'] = json_encode($this->output->confirm('Move report files when tests are complete in a specified folder ?',true));
+						if($configs['doExport']) $configs['exportPath'] = $this->output->ask('Please specify the export path destination',Config::EXPORT_PATH);	
+						$confirmed = $configs['doExport']==='false' ? true : $this->output->confirm('Confirm export path configuration: '.$configs['exportPath'].' ?',true);
 					}
 					
 					// Ask user confirmation for email
 					$confirmed=false;
 					while($confirmed===false){
-						$doMail = $this->output->confirm('Send an email once the tests are complete ?',true);
-						if($doMail){
-							$smtp = $this->output->ask('Please specify the smtp server adress');
-							$smtpPort = $this->output->ask('Please specify the smtp server port',Config::SMTP_PORT);	
-							$mailFrom = $this->output->ask('Please specify mail from adress');
+						$configs['doMail'] = json_encode($this->output->confirm('Send an email once the tests are complete ?',true));
+						if($configs['doMail']==='true'){
+							$configs['smtp'] = $this->output->ask('Please specify the smtp server adress',Config::SMTP);
+							$configs['smtpPort'] = $this->output->ask('Please specify the smtp server port',Config::SMTP_PORT);	
+							$configs['mailFrom'] = $this->output->ask('Please specify mail from adress',Config::MAIL_FROM);
 							$extraMail=true;
 							while($extraMail===true){
-								$mailTo .= $this->output->ask('Please specify mail from adress').';';
+								$configs['mailTo'] .= $this->output->ask('Please specify mail to adress',Config::MAIL_TO).';';
 								$extraMail = $this->output->confirm('Add more recipient ?',false);
 							}
 						}
-						$confirmed = !$doMail ? true : $this->output->confirm('Confirm mail configuration: '.$smtp.':'.$smtpPort.' from '.$mailFrom.' to '.$mailTo.' ?',true);
+						$confirmed = !$configs['doMail'] ? true : $this->output->confirm('Confirm mail configuration: '.$configs['smtp'].':'.$configs['smtpPort'].' from '.$configs['mailFrom'].' to '.$configs['mailTo'].' ?',true);
 					}
 
+          // format config for output table
+          $formatedConfig = [];
+          foreach($configs as $key => $value) $formatedConfig[] = [$key,$value];
+          
 					// Full configuration 
 					$this->output->newLine();
 					$this->output->warning('Configuration summary');
 					$this->output->table(
-						['Variable','Value'],
-						[
-							['doScreenshot' , json_encode($doScreenshot)],
-							['doExport: ' , json_encode($doExport)],
-							['exportPath: ' , $exportPath],	
-							['doMail: ' , json_encode($doMail)],
-							['smtp: ' , $smtp],
-							['smtpPort: ' , $smtpPort],
-							['mailFrom: ' , $mailFrom],
-							['mailTo: ' , $mailTo],
-						]
-					);
+            ['Variable','Value'],
+						$formatedConfig
+          );
 
 					// Full configuration confirmation
 					$confirmedFull = $this->output->confirm('Confirm configuration ?',true);
 			}
 
-			$this->output->warning('TODO : update configuration file');
+      // update the configuration
+      FileUtil::regReplaceYamlConfigFile(Config::PACKAGE_FILES['behat.yml.dist'],$configs);
 			
 			// result
 			$this->output->success(Config::PACKAGE_NAME . ' successfully configurated');
@@ -212,10 +214,14 @@ class InstallCommand extends Command
 			
 			// Copy each files / folder
 			foreach(Config::PACKAGE_FILES as $fileFrom => $fileTo){
-				if( $copyCommand = (is_file($this->recepiesDir . $fileFrom)) )
+				if( $copyCommand = (is_file($fileFrom)) ){
+          $this->output->writeln('copying dir <info>'. $fileFrom.'</> to <info>'.$fileTo.'</>');
 					copy( $this->recepiesDir . $fileFrom , $fileTo);
-				else
-					$this->copyr( $this->recepiesDir . $fileFrom , $fileTo);
+        }
+				else{
+          $this->output->writeln('copying file <info>'. $fileFrom.'</> to <info>'.$fileTo.'</>');
+					FileUtil::copyr( $this->recepiesDir . $fileFrom , $fileTo);
+        }
 			}			
 			
 			// result

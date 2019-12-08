@@ -1,5 +1,5 @@
 <?php
-namespace froggdev\BehatContexts\FeaturedContext\Mailbox;
+namespace froggdev\BehatInstaller\FeaturedContext\Mailbox;
 
 trait MailinatorTrait
 {
