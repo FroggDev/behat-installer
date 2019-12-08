@@ -34,6 +34,8 @@ trait RepportTrait
         $currentRepport = $currentDate->format('Y-m-d');
         $fullPath = $this->exportPath.'/'.$currentRepport. '/' . $currentDate->format('His') . '_' . $this->getMinkParameter('files_path') . '-' . $this->getMinkParameter('browser_name');
 
+        $result=$fullPath;
+        
         // Create files
         mkdir($fullPath,0777 , true);
 
@@ -51,16 +53,22 @@ trait RepportTrait
 
         // Zip + Delete file if no errors
         if( !$this->hasError ) {
-            // Zip the files
-            HZip::zipDir($fullPath,  $fullPath.'.zip');
-            // Clean folder
-            FileUtil::delTree($fullPath );
+          // Zip the files
+          HZip::zipDir($fullPath,  $fullPath.'.zip');
+          $result=$fullPath.'.zip';
+          // Clean folder
+          FileUtil::delTree($fullPath );
         }
 			}
 
 			$this->ISendMail(!$this->hasError);
 
 			//$this->iCleanOldRepport();
+      
+      $this->displayInConsole('You can find the html report in ' . $this->reportPath);
+      
+      if($this->exportPath)
+        $this->displayInConsole('The report has been copied to ' . $result);
     }
 
     /**
