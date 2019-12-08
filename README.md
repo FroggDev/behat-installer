@@ -8,7 +8,7 @@ Adding additionnal contexts &amp; functionnalities to Behat
 - Demo with Environement option
 - Lot of new contexts
 - possibility to define and use variables in scenarios
-- HTML report using emuse/behat-html-formatter
+- HTML report using [emuse/behat-html-formatter](https://packagist.org/packages/emuse/behat-html-formatter)
 - (optional) copy the html report and zip it if no error occured
 - (optional) sending mail once test are done
 
