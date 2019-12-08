@@ -1,4 +1,4 @@
-# Behat-Contexts
+# behat-installer
 
 **This package install BeHat to your projet (or a new project) configured to work with Selenium directly after installing this package.**
 
