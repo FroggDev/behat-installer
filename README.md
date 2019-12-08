@@ -38,6 +38,11 @@ composer require --dev froggdev/behat-installer
 ```
 php bin\console behat:install
 ```
+**Start Behat advanced demo with Selenium**
+```
+vendor\bin\selenium
+vendor\bin\behat
+```
 
 
 ## Todo list
