@@ -1,5 +1,5 @@
 <?php
-namespace froggdev\BehatContexts\Util;
+namespace froggdev\BehatInstaller\Util;
 
 trait FileTrait
 {

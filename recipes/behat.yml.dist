@@ -5,15 +5,15 @@ default:
     ##############
 
     suites:
-        default:
+       default:
             paths: ['%paths.base%/features/demo.feature']
             contexts:
                 - FeatureContext:
                     kernel: '@kernel'
-                - froggdev\BehatContexts\Context:
+                - froggdev\BehatInstaller\Context:
                     - reportPath: public/output/behat
-										- doExport: true
-	                  - exportPath: c:\example\
+                    - doExport: true
+                    - exportPath: c:\example\
                     - doScreenshot: true
                     - doMail: true
                     - smtp: smtp.server.ext
@@ -31,10 +31,10 @@ default:
                 - FeatureContext:
                     kernel: '@kernel'
                 # froggdev extra Contexts 
-                - froggdev\BehatContexts\Context:
+                - froggdev\BehatInstaller\Context:
                     - reportPath: public/output/behat
-										- doExport: true
-	                  - exportPath: c:\example\
+                    - doExport: true
+                    - exportPath: c:\example\
                     - doScreenshot: true
                     - doMail: true
                     - smtp: smtp.server.ext

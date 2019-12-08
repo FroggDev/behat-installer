@@ -1,10 +1,10 @@
 <?php
-namespace froggdev\BehatContexts\Tool;
+namespace froggdev\BehatInstaller\Tool;
 use ZipArchive;
 
 /**
  * Class HZip
- * @package froggdev\BehatContexts\Tool
+ * @package froggdev\BehatInstaller\Tool
  */
 class HZip
 {
