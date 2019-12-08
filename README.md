@@ -31,7 +31,7 @@ composer config minimum-stability dev
 ```
 **Package**
 ```
-composer require --dev froggdev/behat-contexts
+composer require --dev froggdev/behat-installer
 ```
 **Installation & configuration**
 ```
