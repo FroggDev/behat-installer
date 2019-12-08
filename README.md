@@ -4,8 +4,8 @@
 
 Adding additionnal contexts &amp; functionnalities to Behat
 - Advanced demo with Selenium navigation
-- Demo with Internet Explorer as Profile
-- Demo with Environement option
+- Demo with Internet Explorer using BeHat Profile configuration
+- Demo with Environment options
 - Lot of new contexts
 - possibility to define and use variables in scenarios
 - HTML report using [emuse/behat-html-formatter](https://packagist.org/packages/emuse/behat-html-formatter)
