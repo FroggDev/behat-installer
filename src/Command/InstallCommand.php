@@ -1,5 +1,5 @@
 <?php
-namespace App\Command;
+namespace froggdev\BehatInstaller\Command;
 /*
  * This file is part of the Froggdev-BeHat-Installer.
  *

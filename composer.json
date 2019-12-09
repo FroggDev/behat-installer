@@ -1,5 +1,6 @@
 {
     "name": "froggdev/behat-installer",
+		"type": "symfony-bundle",
     "description": "Easy Behat installation with new features and multiple reports options.",
 		"keywords": ["symfony", "framework", "behat", "bdd", "tdd", "context", "frogg"],
 		"license": "MIT",
