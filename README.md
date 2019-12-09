@@ -34,6 +34,12 @@ composer config minimum-stability dev
 ```
 composer require --dev froggdev/behat-installer
 ```
+**Copying the command (Temp fix)**
+As the command won't work when it is in vendor, it has to be copied in src...looking for a better solution...
+
+```
+cp -r vendor/froggdev/behat-installer/src/Command src/Command
+```
 **Installation & configuration**
 ```
 php bin\console behat:install
