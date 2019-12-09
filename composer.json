@@ -15,7 +15,7 @@
         "ext-zip": "*",
         "froggdev/mink": "~1.7",
         "behat/behat": "~3.5",
-        "behat/mink-extension": "~2.3",
+        "froggdev/mink-extension": "~2.3",
         "emuse/behat-html-formatter": "~0.2",
         "behat/symfony2-extension": "~2.1",
         "froggdev/mink-selenium2-driver": "~1.3",
