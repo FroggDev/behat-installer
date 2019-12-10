@@ -46,12 +46,15 @@ vendor\bin\behat
 ```
 
 **Copyright**
+
 Copyright (c) 2019 Frogg admin@frogg.fr.
 
 **Maintainers**
+
 [Frogg FroggDev] (https://github.com/FroggDev)
 
 **Specials thanks**
+
 [Mouncef ZAGHRAT] (https://github.com/Mouncef)
 
 ## Todo list
