@@ -3,6 +3,6 @@
         "behat.yml.dist": "behat.yml.dist",
         "features/": "features/",
 				"Selenium.bat" : "vendor/bin/selenium.bat",
-				"behat.bat" : "vendor/bin/behat.bat",
+				"behat.bat" : "vendor/bin/behat.bat"
     }
 }
