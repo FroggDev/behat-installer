@@ -203,8 +203,8 @@ class InstallCommand extends Command
 					$confirmedFull = $this->output->confirm('Confirm configuration ?',true);
 			}
 
-      // update the configuration
-      FileUtil::regReplaceYamlConfigFile(Config::PACKAGE_FILES['behat.yml.dist'],$configs);
+      // update the configuration			
+      FileUtil::regReplaceYamlConfigFile('behat.yml.dist',$configs);
 		}
 		
 		private function copyFiles(): void
@@ -212,8 +212,10 @@ class InstallCommand extends Command
 			// title
 			$this->setTitle('Copying '.Config::PACKAGE_NAME .' files');
 			
+			$files = json_decode(file_get_contents($this->recepiesDir.'/manifest.json'), true);
+			
 			// Copy each files / folder
-			foreach(Config::PACKAGE_FILES as $fileFrom => $fileTo){
+			foreach($files["copy-from-recipe"] as $fileFrom => $fileTo){
 				if( $copyCommand = (is_file($fileFrom)) ){
           $this->output->writeln('copying dir <info>'. $fileFrom.'</> to <info>'.$fileTo.'</>');
 					copy( $this->recepiesDir . $fileFrom , $fileTo);

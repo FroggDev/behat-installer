@@ -38,11 +38,7 @@ Abstract class Config
    
   const PACKAGE_PATH = 'vendor/froggdev/behat-installer';
 
-  const PACKAGE_FILES = [
-    'features' => 'features',
-    'behat.yml.dist' => 'behat.yml.dist',
-    'selenium.bat' => 'vendor/bin/selenium.bat'    
-  ];
+  const PACKAGE_FILES = 'manifest.json';
 
   const PACKAGE_MESSAGE = 'post-install.txt';
   
