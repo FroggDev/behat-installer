@@ -46,6 +46,13 @@ vendor\bin\selenium
 vendor\bin\behat
 ```
 
+**Stability (optional)**
+
+If you don't require minimum-stability dev, it is better to restore default value to prevent composer update looking for dev packages.
+```
+composer config minimum-stability satble
+```
+
 
 ## Todo list
 - [ ] Remove package remove bootstrap.php
