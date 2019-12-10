@@ -5,7 +5,7 @@
 
 # behat-installer
 
-**This package install BeHat to your projet (or a new project) configured to work with Selenium directly after installing this package.**
+**This package install BeHat to your symfony projet (or a new symfony project) configured to work with Selenium directly after installing this package.**
 
 Adding additionnal contexts &amp; functionnalities to Behat
 - Advanced demo with Selenium navigation
@@ -45,7 +45,14 @@ vendor\bin\selenium
 vendor\bin\behat
 ```
 
+**Copyright**
+Copyright (c) 2019 Frogg admin@frogg.fr.
 
+**Maintainers**
+[Frogg FroggDev] (https://github.com/FroggDev)
+
+**Specials thanks**
+[Mouncef ZAGHRAT] (https://github.com/Mouncef)
 
 ## Todo list
 
