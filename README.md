@@ -3,6 +3,12 @@
 [![Total Downloads](https://poser.pugx.org/froggdev/behat-installer/downloads.svg)](https://packagist.org/packages/froggdev/behat-installer)
 [![License](https://poser.pugx.org/froggdev/behat-installer/license.svg)](https://packagist.org/packages/froggdev/behat-installer)
 
+
+[![Build Status](https://travis-ci.org/froggdev/behat-installer.svg?branch=master)](https://travis-ci.org/froggdev/behat-installer)
+[![Scrutinizer Quality Score](https://scrutinizer-ci.com/g/froggdev/behat-installer/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/froggdev/behat-installer/)
+[![Code Coverage](https://scrutinizer-ci.com/g/froggdev/behat-installer/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/froggdev/behat-installer/)
+
+
 # behat-installer
 
 **This package install BeHat to your projet (or a new project) configured to work with Selenium directly after installing this package.**
