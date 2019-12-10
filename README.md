@@ -45,18 +45,6 @@ vendor\bin\selenium
 vendor\bin\behat
 ```
 
-**Copyright**
-
-Copyright (c) 2019 Frogg admin@frogg.fr.
-
-**Maintainers**
-
-[Frogg FroggDev] (https://github.com/FroggDev)
-
-**Specials thanks**
-
-[Mouncef ZAGHRAT] (https://github.com/Mouncef)
-
 ## Todo list
 
 - [x] Install without stability dev required
@@ -69,3 +57,18 @@ Copyright (c) 2019 Frogg admin@frogg.fr.
 - [ ] Do more advanced scenario
 - [ ] Add demo with BeHat TAG sample
 - [ ] Translation
+
+
+## Credits
+
+**Maintainers**
+
+[Frogg FroggDev] (https://github.com/FroggDev)
+
+**Specials thanks**
+
+[Mouncef ZAGHRAT] (https://github.com/Mouncef)
+
+**Copyright**
+
+Copyright (c) 2019 Frogg admin@frogg.fr.
