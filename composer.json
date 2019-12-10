@@ -20,7 +20,7 @@
         "froggdev/symfony2-extension": "~2.1",
         "froggdev/mink-selenium2-driver": "~1.3",
         "froggdev/mink-goutte-driver": "~1.2",
-				"FroggDev/MinkBrowserKitDriver": "~1.3",
+				"froggdev/mink-browserkit-driver": "~1.3",
         "froggdev/php-utils": "~1.0"       
     },
     "autoload": {
