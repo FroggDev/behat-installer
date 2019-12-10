@@ -60,8 +60,9 @@ composer config minimum-stability stable
 
 
 ## Todo list
+- [ ] Install without stability dev required
 - [ ] Remove package remove bootstrap.php
-- [ ] Bug result ok is based on 1st scenario
+- [ ] Bug result ok is based only on 1st scenario
 - [ ] Translation
 - [ ] Replace :value to RegExp
 - [ ] Do more advanced scenario
