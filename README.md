@@ -55,7 +55,7 @@ vendor\bin\behat
 
 If you don't require minimum-stability dev, it is better to restore default value to prevent composer update looking for dev packages.
 ```
-composer config minimum-stability satble
+composer config minimum-stability stable
 ```
 
 
