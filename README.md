@@ -29,12 +29,6 @@ Or with composer create-project command
 ```
 composer create-project symfony/skeleton ./ 4.4.99
 ```
-**Stability**
-
-ATM require minimum-stability dev
-```
-composer config minimum-stability dev	
-```
 **Package**
 ```
 composer require --dev froggdev/behat-installer
@@ -51,19 +45,17 @@ vendor\bin\selenium
 vendor\bin\behat
 ```
 
-**Stability (optional)**
-
-If you don't require minimum-stability dev, it is better to restore default value to prevent composer update looking for dev packages.
-```
-composer config minimum-stability stable
-```
 
 
 ## Todo list
-- [ ] Install without stability dev required
-- [ ] Remove package remove bootstrap.php
+
+- [x] Install without stability dev required
+- [x] Remove package remove bootstrap.php ( was in symfony extension recipies)
+- [ ] Work with IE
+- [ ] Script behat:config
+- [ ] add uservar to user feature
 - [ ] Bug result ok is based only on 1st scenario
-- [ ] Translation
 - [ ] Replace :value to RegExp
 - [ ] Do more advanced scenario
 - [ ] Add demo with BeHat TAG sample
+- [ ] Translation
