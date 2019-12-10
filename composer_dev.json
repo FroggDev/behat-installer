@@ -14,12 +14,12 @@
         "php": ">=7.1.3",
         "ext-zip": "*",
         "behat/mink": "dev-master",
-        "behat/behat": "^3.4.3",
-        "behat/mink-extension": "2.3.1",
+        "behat/behat": "~3.5",
+        "behat/mink-extension": "~2.3",
         "emuse/behat-html-formatter": "~0.2",
-        "behat/symfony2-extension": "dev-master",
-        "behat/mink-selenium2-driver": "dev-master",
-        "behat/mink-goutte-driver": "dev-master",
+        "behat/symfony2-extension": "~2.1",
+        "behat/mink-selenium2-driver": "~1.3",
+        "behat/mink-goutte-driver": "~1.2",
         "froggdev/php-utils": "~1.0"
     },
     "autoload": {
