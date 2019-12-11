@@ -63,11 +63,11 @@ vendor\bin\behat
 
 **Maintainers**
 
-[Frogg FroggDev] (https://github.com/FroggDev)
+[Frogg FroggDev](https://github.com/FroggDev)
 
 **Specials thanks**
 
-[Mouncef ZAGHRAT] (https://github.com/Mouncef)
+[Mouncef ZAGHRAT](https://github.com/Mouncef)
 
 **Copyright**
 
