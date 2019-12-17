@@ -48,7 +48,19 @@ vendor\bin\behat
 
 - [x] Install without stability dev required
 - [x] Remove package remove bootstrap.php ( was in symfony extension recipies)
-- [ ] symfony 5.0 TreeBuilder in behat/behat/Testwork/src/ServiceContainer/Configuration/ConfigurationTree.php 
+- [ ] symfony 5.0 
+ TreeBuilder in behat/behat/Testwork/src/ServiceContainer/Configuration/ConfigurationTree.php 
+  ```
+            // Symfony <= 4.4
+            $tree = new TreeBuilder();
+            $root = $tree->root('testwork');
+```
+```
+            // Symfony >= 5.0
+            $tree = new TreeBuilder('testwork');
+            $root = $tree->getRootNode();
+```
+ Symfony\Component\EventDispatcher\Event -> Symfony\Contracts\EventDispatcher\Event
 - [ ] Work with IE
 - [ ] Remove ralouphie package
 - [ ] Script behat:config
