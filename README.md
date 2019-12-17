@@ -83,6 +83,29 @@ vendor\bin\behat
            
            behat/Behat/src/Gherkin/Cli/SyntaxController.php               
            public function __construct(KeywordsDumper $dumper,  $translator)
+           
+           behat/Behat/src/Definition/Translator/DefinitionTranslator.php
+           public function __construct($translator)
+           
+           behat/Behat/src/Context/Cli/ContextSnippetsController.php           
+           public function __construct(ContextSnippetGenerator $generator,  $translator)
+           
+           behat/Behat/src/Snippet/Printer/ConsoleSnippetPrinter.php
+           public function __construct(OutputInterface $output,  $translator)
+           
+           behat/Behat/src/Transformation/Transformer/RepositoryArgumentTransformer.php    
+           public function __construct(
+                   TransformationRepository $repository,
+                   CallCenter $callCenter,
+                   PatternTransformer $patternTransformer,
+                   $translator
+                   
+           behat/Behat/src/Context/Cli/InteractiveContextIdentifier.php
+
+           behat/Testwork/src/EventDispatcher/Tester/EventDispatchingExercise.php
+           $this->eventDispatcher->dispatch( $event,$event::BEFORE);
+           $this->eventDispatcher->dispatch( $event,$event::AFTER_SETUP);
+           
 ```
 - [ ] Work with IE
 - [ ] Remove ralouphie package
