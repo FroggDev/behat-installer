@@ -60,7 +60,14 @@ vendor\bin\behat
             $tree = new TreeBuilder('testwork');
             $root = $tree->getRootNode();
 ```
- Symfony\Component\EventDispatcher\Event -> Symfony\Contracts\EventDispatcher\Event
+```
+            // Symfony <= 4.4
+            Symfony\Component\EventDispatcher\Event 
+```
+```
+            // Symfony >= 5.0            
+            Symfony\Contracts\EventDispatcher\Event
+```
 - [ ] Work with IE
 - [ ] Remove ralouphie package
 - [ ] Script behat:config
