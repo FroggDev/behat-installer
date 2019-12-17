@@ -130,7 +130,14 @@ vendor\bin\behat
            $this->eventDispatcher->dispatch($event,$event::BEFORE);
            $this->eventDispatcher->dispatch($event,$event::AFTER_SETUP);
            $this->eventDispatcher->dispatch($event,$event::BEFORE_TEARDOWN);
-           $this->eventDispatcher->dispatch($event,$event::AFTER);     
+           $this->eventDispatcher->dispatch($event,$event::AFTER);
+           
+           behat/Behat/src/EventDispatcher/Tester/EventDispatchingFeatureTester.php
+           $this->eventDispatcher->dispatch( $event,$event::BEFORE_TEARDOWN);
+           $this->eventDispatcher->dispatch($event,$event::AFTER);
+           
+           + other $this->eventDispatcher->dispatch( ...
+        
 ```
 - [ ] Work with IE
 - [ ] Remove ralouphie package
