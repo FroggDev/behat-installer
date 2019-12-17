@@ -57,7 +57,9 @@ vendor\bin\behat
 - [ ] Replace :value to RegExp
 - [ ] Do more advanced scenario
 - [ ] Add demo with BeHat TAG sample
+- [ ] Linux version
 - [ ] Translation
+
 
 
 ## Credits
