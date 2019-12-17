@@ -1,6 +1,6 @@
 <?php
 namespace froggdev\BehatInstaller\Command;
-/*
+/**
  * This file is part of the Froggdev-BeHat-Installer.
  *
  * (c) Frogg <admin@frogg.fr>
@@ -240,7 +240,7 @@ class InstallCommand extends Command
 			// replace something in the file string - this is a VERY simple example
 			$fileContent=str_replace(
 				'(null !== $definition->getFile())',
-				'(null !== $definition->getFile() && \'\'!==$definition->getFile()&& getcwd().\'/\'!==$definition->getFile())',
+				'(null !== $definition->getFile() && \'\'!==$definition->getFile()&& strtolower(getcwd().\'/\')!==strtolower($definition->getFile()))',
 				$fileContent
 			);
 
