@@ -80,8 +80,9 @@ vendor\bin\behat
                    
            behat/Behat/src/Output/Node/Printer/ListPrinter.php
            public function __construct(ResultToStringConverter $resultConverter, $translator)
-                   
-
+           
+           behat/Behat/src/Gherkin/Cli/SyntaxController.php               
+           public function __construct(KeywordsDumper $dumper,  $translator)
 ```
 - [ ] Work with IE
 - [ ] Remove ralouphie package
