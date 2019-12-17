@@ -41,7 +41,6 @@ php bin\console behat:install
 
 command to run BeHat advanced demo with Selenium
 ```
-vendor\bin\selenium
 vendor\bin\behat
 ```
 
