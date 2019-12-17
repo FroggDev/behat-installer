@@ -68,6 +68,24 @@ vendor\bin\behat
             // Symfony >= 5.0            
             Symfony\Contracts\EventDispatcher\Event
 ```
+
+```
+           // Symfony >= 5.0  
+           mink-drivers/src/BrowserKitDriver.php
+           public function __construct($client
+           
+           behat/Behat/src/Output/Node/Printer/CounterPrinter.php
+           public function __construct(
+                   ResultToStringConverter $resultConverter,
+                   ExceptionPresenter $exceptionPresenter,
+                   $translator,
+                   $basePath
+                   
+           behat/Behat/src/Output/Node/Printer/ListPrinter.php
+           public function __construct(ResultToStringConverter $resultConverter, $translator)
+                   
+
+```
 - [ ] Work with IE
 - [ ] Remove ralouphie package
 - [ ] Script behat:config
