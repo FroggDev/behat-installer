@@ -23,11 +23,11 @@ Adding additionnal contexts &amp; functionnalities to Behat
 
 Using symfony.exe
 ```
-Symfony new ./ --version=4.4
+Symfony new ./myProject --version=4.4
 ```
 Or with composer create-project command
 ```
-composer create-project symfony/skeleton ./ 4.4.99
+composer create-project symfony/skeleton ./myProject 4.4.99
 ```
 **Package**
 ```
