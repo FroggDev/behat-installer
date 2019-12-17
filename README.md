@@ -49,13 +49,12 @@ vendor\bin\behat
 - [x] Install without stability dev required
 - [x] Remove package remove bootstrap.php ( was in symfony extension recipies)
 - [ ] symfony 5.0 
- TreeBuilder in behat/behat/Testwork/src/ServiceContainer/Configuration/ConfigurationTree.php 
+
 ```
+            behat/behat/Testwork/src/ServiceContainer/Configuration/ConfigurationTree.php 
             // Symfony <= 4.4
             $tree = new TreeBuilder();
             $root = $tree->root('testwork');
-```
-```
             // Symfony >= 5.0
             $tree = new TreeBuilder('testwork');
             $root = $tree->getRootNode();
@@ -63,8 +62,6 @@ vendor\bin\behat
 ```
             // Symfony <= 4.4
             Symfony\Component\EventDispatcher\Event 
-```
-```
             // Symfony >= 5.0            
             Symfony\Contracts\EventDispatcher\Event
 ```
