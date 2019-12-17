@@ -137,6 +137,8 @@ vendor\bin\behat
            $this->eventDispatcher->dispatch($event,$event::AFTER);
            
            + other $this->eventDispatcher->dispatch( ...
+           
+           + todo $this->translator->transChoice( ...
         
 ```
 - [ ] Work with IE
