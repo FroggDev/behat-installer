@@ -50,6 +50,7 @@ vendor\bin\behat
 - [x] Remove package remove bootstrap.php ( was in symfony extension recipies)
 - [ ] symfony 5.0 TreeBuilder in behat/behat/Testwork/src/ServiceContainer/Configuration/ConfigurationTree.php 
 - [ ] Work with IE
+- [ ] Remove ralouphie package
 - [ ] Script behat:config
 - [ ] add uservar to user feature
 - [ ] Bug result ok is based only on 1st scenario
