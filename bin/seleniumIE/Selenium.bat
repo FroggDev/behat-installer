@@ -1,19 +1,35 @@
-@echo off
+@ECHO off
 
-set seleniumFolder=%~dp0
+SET SELENIUMFOLDER=%~dp0
 
-set selenium="%seleniumFolder%\selenium-server-standalone-2.46.0.jar"
-set ieDriver="%seleniumFolder%\IEDriverServer.exe"
-set chromeDriver="%seleniumFolder%\chromedriver.exe"
+SET SELENIUM="%SELENIUMFOLDER%\selenium-server-standalone-2.46.0.jar"
+SET IEDRIVER="%SELENIUMFOLDER%\IEDriverServer.exe"
+SET CHROMEDRIVER="%SELENIUMFOLDER%\chromedriver.exe"
 
-IF EXIST %selenium% (
-java -Dwebdriver.chrome.driver=%chromeDriver% -Dwebdriver.ie.driver=%ieDriver% -jar %selenium%
-) else (
-echo file %selenium% not found.
-REM Make a pause
-echo. 
-pause
-echo. 
+
+REM check if can find selenium
+IF NOT EXIST %SELENIUM% (
+ECHO "Cannot find %SELENIUM%"
+PAUSE
+EXIT 1
 )
+
+REM check if can find ieDriver
+IF NOT EXIST %IEDRIVER% (
+ECHO "Cannot find %IEDRIVER%"
+PAUSE
+EXIT 1
+)
+
+REM check if can find chromeDriver
+IF NOT EXIST %CHROMEDRIVER% (
+ECHO "Cannot find %CHROMEDRIVER%"
+PAUSE
+EXIT 1
+)
+
+REM Start selenium with IE driver and chrome driver
+java -Dwebdriver.chrome.driver=%CHROMEDRIVER% -Dwebdriver.ie.driver=%IEDRIVER% -jar %SELENIUM%
+
 
 
