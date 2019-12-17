@@ -106,6 +106,12 @@ vendor\bin\behat
            $this->eventDispatcher->dispatch( $event,$event::BEFORE);
            $this->eventDispatcher->dispatch( $event,$event::AFTER_SETUP);
            
+           behat/Testwork/src/EventDispatcher/TestworkEventDispatcher.php   
+           // Symfony <= 4.4  
+           //$this->doDispatch($this->getListeners($eventName), $eventName, $event);
+           // Symfony >= 5.0  
+           $this->callListeners($this->getListeners($eventName), $eventName, $event);
+           
 ```
 - [ ] Work with IE
 - [ ] Remove ralouphie package
