@@ -112,6 +112,25 @@ vendor\bin\behat
            // Symfony >= 5.0  
            $this->callListeners($this->getListeners($eventName), $eventName, $event);
            
+           behat/Testwork/src/EventDispatcher/Tester/EventDispatchingSuiteTester.php
+           $this->eventDispatcher->dispatch( $event,$event::BEFORE);
+           $this->eventDispatcher->dispatch( $event,$event::AFTER_SETUP);
+           
+           behat/Behat/src/EventDispatcher/Tester/EventDispatchingFeatureTester.php
+           $this->eventDispatcher->dispatch($event,$event::BEFORE);
+           $this->eventDispatcher->dispatch($event,$event::AFTER_SETUP);
+           
+           behat/Behat/src/EventDispatcher/Tester/EventDispatchingScenarioTester.php
+           $this->eventDispatcher->dispatch($event,$this->beforeEventName);
+           $this->eventDispatcher->dispatch($event,$this->afterSetupEventName);
+           $this->eventDispatcher->dispatch($event,$this->beforeTeardownEventName);       
+           $this->eventDispatcher->dispatch($event,$this->afterEventName);
+           
+           behat/Behat/src/EventDispatcher/Tester/EventDispatchingStepTester.php
+           $this->eventDispatcher->dispatch($event,$event::BEFORE);
+           $this->eventDispatcher->dispatch($event,$event::AFTER_SETUP);
+           $this->eventDispatcher->dispatch($event,$event::BEFORE_TEARDOWN);
+           $this->eventDispatcher->dispatch($event,$event::AFTER);     
 ```
 - [ ] Work with IE
 - [ ] Remove ralouphie package
